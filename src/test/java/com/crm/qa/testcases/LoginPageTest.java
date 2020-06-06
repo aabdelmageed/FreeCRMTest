@@ -26,6 +26,7 @@ public class LoginPageTest extends TestBase{
 	@BeforeMethod
 	public void setUp() {
 		initialization();
+		log.info("Login Page Test");
 		mainPage  = new MainPage();
 		loginPage = new LoginPage();
 		homePage  = new HomePage();

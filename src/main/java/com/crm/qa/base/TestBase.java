@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -15,6 +16,8 @@ public class TestBase {
 
 	public static WebDriver driver;
 	public static Properties prob;
+	
+	public static Logger log = Logger.getLogger(TestBase.class);
 
 	public TestBase() {
 		prob = new Properties();
@@ -32,7 +35,7 @@ public class TestBase {
 	public static void initialization() {
 
 		String browserName = prob.getProperty("browser");
-System.out.println("DDDDDDD "+browserName);
+		log.info("Lanching Chrome browser");
 		if (browserName.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
 			driver = new ChromeDriver();
