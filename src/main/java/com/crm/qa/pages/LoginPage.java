@@ -7,6 +7,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.crm.qa.base.TestBase;
 
+import io.qameta.allure.Step;
+
 public class LoginPage extends TestBase{
 	
 
@@ -31,6 +33,7 @@ public class LoginPage extends TestBase{
 		return driver.getTitle();
 	}
 	
+	@Step("Login With FreeCRM App with username: {0} And Password: {1} ")
 	public HomePage login(String usename , String pass) {
 		loginEmailAddress.sendKeys(usename);
 		password.sendKeys(pass);

@@ -6,6 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.crm.qa.base.TestBase;
 
+import io.qameta.allure.Step;
+
 public class MainPage extends TestBase {
 	
 	//PageFactory -- Object-Repository 
@@ -24,6 +26,7 @@ public class MainPage extends TestBase {
 	
 	
 	//Actions
+	@Step("Login With FreeCRM App ....... ")
 	public LoginPage clickLoginCRM() {
 		loginLink.click();
 		//Landing to LoginPage
@@ -31,6 +34,7 @@ public class MainPage extends TestBase {
 		
 	}
 	
+	@Step("Getting Title Of Main Page ........  ")
 	public String getTitleForMainPage() {
 		
 		return driver.getTitle();

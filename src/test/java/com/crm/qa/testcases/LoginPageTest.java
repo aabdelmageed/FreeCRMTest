@@ -11,6 +11,11 @@ import com.crm.qa.pages.HomePage;
 import com.crm.qa.pages.LoginPage;
 import com.crm.qa.pages.MainPage;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+
 public class LoginPageTest extends TestBase{
 	
 	MainPage  mainPage;
@@ -33,7 +38,10 @@ public class LoginPageTest extends TestBase{
 	}
 	
 
-	@Test(priority=1)
+	@Test(priority=1 ,description="Veryfiy The Title of Main Page")
+	@Severity(SeverityLevel.NORMAL)
+	@Description("Test Case Verify Title of Main Page")
+	@Story("Story Name : Veryfiy The Title of Main Page")
 	public void getTitleForMainPage() {
 		String title=mainPage.getTitleForMainPage();
 		System.out.println("title "+title);
@@ -41,7 +49,10 @@ public class LoginPageTest extends TestBase{
 		softAssert.assertAll();
 	}
 	
-	@Test (priority=2)
+	@Test (priority=2,description="Login To FreeCRM App")
+	@Severity(SeverityLevel.CRITICAL)
+	@Description("Test Login To FreeCRM App")
+	@Story("Story Name : Login To FreeCRM App")
 	public void loginCRMTest() throws InterruptedException
 	{
 		mainPage.clickLoginCRM();
