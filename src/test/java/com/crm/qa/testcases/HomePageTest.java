@@ -3,6 +3,7 @@ package com.crm.qa.testcases;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -11,7 +12,10 @@ import com.crm.qa.pages.HomePage;
 import com.crm.qa.pages.LoginPage;
 import com.crm.qa.pages.MainPage;
 import com.crm.qa.util.TestUtil;
+import com.qa.AllureReportListener.TestAllureListener;
+import com.qa.ExtentReportListener.ExtentReporterNG;
 
+@Listeners({TestAllureListener.class , ExtentReporterNG.class})
 public class HomePageTest extends TestBase {
 
 	MainPage mainPage;
@@ -38,7 +42,7 @@ public class HomePageTest extends TestBase {
 	public void verifyHomePageTitleTest() {
 		String homePageTitle = homePage.homePageTitle();
 		System.out.println(homePageTitle);
-		softAssert.assertEquals(homePageTitle, "Cogmento CRM", "Home Page Title Not Matched");
+		softAssert.assertEquals(homePageTitle, "Cogmento sCRM", "Home Page Title Not Matched");
 		softAssert.assertAll();
 
 	}

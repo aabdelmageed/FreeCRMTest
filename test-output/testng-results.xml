@@ -1,63 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="4" passed="4">
+<testng-results skipped="0" failed="1" ignored="0" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="FREE CRM Application Test Automation Test Suite" duration-ms="56623" started-at="2020-06-06T20:59:51Z" finished-at="2020-06-06T21:00:48Z">
+  <suite name="FREE CRM Application Test Automation Test Suite" duration-ms="33772" started-at="2020-06-07T20:27:19Z" finished-at="2020-06-07T20:27:53Z">
     <groups>
     </groups>
-    <test name="Free CRM App Test Cases" duration-ms="56623" started-at="2020-06-06T20:59:51Z" finished-at="2020-06-06T21:00:48Z">
+    <test name="Free CRM App Test Cases" duration-ms="33772" started-at="2020-06-07T20:27:19Z" finished-at="2020-06-07T20:27:53Z">
       <class name="com.crm.qa.testcases.HomePageTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.crm.qa.testcases.HomePageTest@48e4374]" name="setUp" is-config="true" duration-ms="14596" started-at="2020-06-07T01:00:06Z" finished-at="2020-06-07T01:00:21Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.crm.qa.testcases.HomePageTest@72be135f]" name="setUp" is-config="true" duration-ms="16200" started-at="2020-06-08T00:27:19Z" finished-at="2020-06-08T00:27:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="verifyHomePageTitleTest()[pri:1, instance:com.crm.qa.testcases.HomePageTest@48e4374]" name="verifyHomePageTitleTest" duration-ms="13" started-at="2020-06-07T01:00:21Z" finished-at="2020-06-07T01:00:21Z">
+        <test-method status="FAIL" signature="verifyHomePageTitleTest()[pri:1, instance:com.crm.qa.testcases.HomePageTest@72be135f]" name="verifyHomePageTitleTest" duration-ms="112" started-at="2020-06-08T00:27:35Z" finished-at="2020-06-08T00:27:36Z">
+          <exception class="java.lang.AssertionError">
+            <message>
+              <![CDATA[The following asserts failed:
+	Home Page Title Not Matched expected [Cogmento sCRM] but found [Cogmento CRM]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.AssertionError: The following asserts failed:
+	Home Page Title Not Matched expected [Cogmento sCRM] but found [Cogmento CRM]
+	at org.testng.asserts.SoftAssert.assertAll(SoftAssert.java:43)
+	at com.crm.qa.testcases.HomePageTest.verifyHomePageTitleTest(HomePageTest.java:46)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:108)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:661)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:869)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1193)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:126)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+	at org.testng.TestRunner.privateRun(TestRunner.java:744)
+	at org.testng.TestRunner.run(TestRunner.java:602)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:380)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:375)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1301)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1226)
+	at org.testng.TestNG.runSuites(TestNG.java:1144)
+	at org.testng.TestNG.run(TestNG.java:1115)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:137)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:58)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyHomePageTitleTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.crm.qa.testcases.HomePageTest@48e4374]" name="tearDown" is-config="true" duration-ms="792" started-at="2020-06-07T01:00:21Z" finished-at="2020-06-07T01:00:22Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.crm.qa.testcases.HomePageTest@72be135f]" name="tearDown" is-config="true" duration-ms="1447" started-at="2020-06-08T00:27:36Z" finished-at="2020-06-08T00:27:38Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.crm.qa.testcases.HomePageTest@48e4374]" name="setUp" is-config="true" duration-ms="11466" started-at="2020-06-07T01:00:33Z" finished-at="2020-06-07T01:00:45Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:com.crm.qa.testcases.HomePageTest@72be135f]" name="setUp" is-config="true" duration-ms="11702" started-at="2020-06-08T00:27:38Z" finished-at="2020-06-08T00:27:49Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="verifyUserNameTitleTest()[pri:2, instance:com.crm.qa.testcases.HomePageTest@48e4374]" name="verifyUserNameTitleTest" duration-ms="1586" started-at="2020-06-07T01:00:45Z" finished-at="2020-06-07T01:00:47Z">
+        <test-method status="PASS" signature="verifyUserNameTitleTest()[pri:2, instance:com.crm.qa.testcases.HomePageTest@72be135f]" name="verifyUserNameTitleTest" duration-ms="1613" started-at="2020-06-08T00:27:49Z" finished-at="2020-06-08T00:27:51Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- verifyUserNameTitleTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.crm.qa.testcases.HomePageTest@48e4374]" name="tearDown" is-config="true" duration-ms="1301" started-at="2020-06-07T01:00:47Z" finished-at="2020-06-07T01:00:48Z">
+        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.crm.qa.testcases.HomePageTest@72be135f]" name="tearDown" is-config="true" duration-ms="1662" started-at="2020-06-08T00:27:51Z" finished-at="2020-06-08T00:27:53Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
       </class> <!-- com.crm.qa.testcases.HomePageTest -->
-      <class name="com.crm.qa.testcases.LoginPageTest">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.crm.qa.testcases.LoginPageTest@49d904ec]" name="setUp" is-config="true" duration-ms="14270" started-at="2020-06-07T00:59:51Z" finished-at="2020-06-07T01:00:06Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="getTitleForMainPage()[pri:1, instance:com.crm.qa.testcases.LoginPageTest@49d904ec]" name="getTitleForMainPage" duration-ms="65" started-at="2020-06-07T01:00:06Z" description="Veryfiy The Title of Main Page" finished-at="2020-06-07T01:00:06Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- getTitleForMainPage -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.crm.qa.testcases.LoginPageTest@49d904ec]" name="tearDown" is-config="true" duration-ms="610" started-at="2020-06-07T01:00:06Z" finished-at="2020-06-07T01:00:06Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-        <test-method status="PASS" signature="setUp()[pri:0, instance:com.crm.qa.testcases.LoginPageTest@49d904ec]" name="setUp" is-config="true" duration-ms="7682" started-at="2020-06-07T01:00:22Z" finished-at="2020-06-07T01:00:29Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setUp -->
-        <test-method status="PASS" signature="loginCRMTest()[pri:2, instance:com.crm.qa.testcases.LoginPageTest@49d904ec]" name="loginCRMTest" duration-ms="3328" started-at="2020-06-07T01:00:29Z" description="Login To FreeCRM App" finished-at="2020-06-07T01:00:33Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- loginCRMTest -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:com.crm.qa.testcases.LoginPageTest@49d904ec]" name="tearDown" is-config="true" duration-ms="715" started-at="2020-06-07T01:00:33Z" finished-at="2020-06-07T01:00:33Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- com.crm.qa.testcases.LoginPageTest -->
     </test> <!-- Free CRM App Test Cases -->
   </suite> <!-- FREE CRM Application Test Automation Test Suite -->
 </testng-results>

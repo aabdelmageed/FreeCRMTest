@@ -1,68 +1,123 @@
 package com.qa.ExtentReportListener;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
-import org.testng.IReporter;
-import org.testng.IResultMap;
-import org.testng.ISuite;
-import org.testng.ISuiteResult;
 import org.testng.ITestContext;
+import org.testng.ITestListener;
 import org.testng.ITestResult;
-import org.testng.xml.XmlSuite;
 
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
-public class ExtentReporterNG implements IReporter {
-	private ExtentReports extent;
-	@Override
-	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
-		
-		extent = new ExtentReports(outputDirectory + File.separator
-				+ "Extent.html", true);	
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.ChartLocation;
+import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.crm.qa.base.TestBase;
+public class ExtentReporterNG extends TestBase implements ITestListener {
 
-		for (ISuite suite : suites) {
-			Map<String, ISuiteResult> result = suite.getResults();
+	private static final String OUTPUT_FOLDER = "./build/";
+	private static final String FILE_NAME = "TestExecutionReport.html";
 
-			for (ISuiteResult r : result.values()) {
-				ITestContext context = r.getTestContext();
+	private static ExtentReports extent = init();
+	public static ThreadLocal<ExtentTest> test = new ThreadLocal<ExtentTest>();
 
-				buildTestNodes(context.getPassedTests(), LogStatus.PASS);
-				buildTestNodes(context.getFailedTests(), LogStatus.FAIL);
-				buildTestNodes(context.getSkippedTests(), LogStatus.SKIP);
-			}
-	}
-		extent.flush();
-		extent.close();
-	}
-
-	private void buildTestNodes(IResultMap tests, LogStatus status) {
-		ExtentTest test;
-
-		if (tests.size() > 0) {
-			for (ITestResult result : tests.getAllResults()) {
-				test = extent.startTest(result.getMethod().getMethodName());
-
-				test.setStartedTime(getTime(result.getStartMillis()));
-				test.setEndedTime(getTime(result.getEndMillis()));
-
-				for (String group : result.getMethod().getGroups())
-					test.assignCategory(group);
-
-				if (result.getThrowable() != null) {
-					test.log(status, result.getThrowable());
-				} else {
-					test.log(status, "Test " + status.toString().toLowerCase()
-							+ "ed");
-				}
-
-				extent.endTest(test);
+	private static ExtentReports init() {
+ 
+		Path path = Paths.get(OUTPUT_FOLDER);
+		// if directory exists?
+		if (!Files.exists(path)) {
+			try {
+				Files.createDirectories(path);
+			} catch (IOException e) {
+				// fail to create directory
+				e.printStackTrace();
 			}
 		}
+		ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(OUTPUT_FOLDER + FILE_NAME);
+		htmlReporter.config().setDocumentTitle("Automation Test Results");
+		htmlReporter.config().setReportName("Automation Test Results");
+		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
+		htmlReporter.config().setTheme(Theme.STANDARD);
+
+		extent = new ExtentReports();
+		extent.attachReporter(htmlReporter);
+		extent.setReportUsesManualConfiguration(true);
+
+		return extent;
+	}
+
+	public synchronized void onStart(ITestContext context) {
+		System.out.println("Test Suite started!");
+	}
+
+	public synchronized void onFinish(ITestContext context) {
+		System.out.println(("Test Suite is ending!"));
+		extent.flush();
+		test.remove();
+	}
+
+	public synchronized void onTestStart(ITestResult result) {
+		String methodName = result.getMethod().getMethodName();
+		String qualifiedName = result.getMethod().getQualifiedName();
+		int last = qualifiedName.lastIndexOf(".");
+		int mid = qualifiedName.substring(0, last).lastIndexOf(".");
+		String className = qualifiedName.substring(mid + 1, last);
+
+		System.out.println(methodName + " started!");
+		ExtentTest extentTest = extent.createTest(result.getMethod().getMethodName(),
+				result.getMethod().getDescription());
+
+		extentTest.assignCategory(result.getTestContext().getSuite().getName());
+		/*
+		 * methodName = StringUtils.capitalize(StringUtils.join(StringUtils.
+		 * splitByCharacterTypeCamelCase(methodName), StringUtils.SPACE));
+		 */
+		extentTest.assignCategory(className);
+		test.set(extentTest);
+		test.get().getModel().setStartTime(getTime(result.getStartMillis()));
+	}
+
+	public synchronized void onTestSuccess(ITestResult result) {
+		System.out.println((result.getMethod().getMethodName() + " passed!"));
+		test.get().pass("Test passed");
+		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
+	}
+
+	public synchronized void onTestFailure(ITestResult result) {
+		System.out.println((result.getMethod().getMethodName() + " failed!"));
+		try {
+			test.get().fail(result.getThrowable(),
+					MediaEntityBuilder.createScreenCaptureFromPath(result.getMethod().getMethodName()).build());
+		} catch (IOException e) {
+			System.err
+					.println("Exception thrown while updating test fail status " + Arrays.toString(e.getStackTrace()));
+		}
+		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
+	}
+
+	@Override
+	public synchronized void onTestSkipped(ITestResult result) {
+		System.out.println((result.getMethod().getMethodName() + " skipped!"));
+		try {
+			test.get().skip(result.getThrowable(),
+					MediaEntityBuilder.createScreenCaptureFromPath(result.getMethod().getMethodName()).build());
+			
+		} catch (IOException e) {
+			System.err
+					.println("Exception thrown while updating test skip status " + Arrays.toString(e.getStackTrace()));
+		}
+		test.get().getModel().setEndTime(getTime(result.getEndMillis()));
+	}
+
+	@Override
+	public synchronized void onTestFailedButWithinSuccessPercentage(ITestResult result) {
+		System.out.println(("onTestFailedButWithinSuccessPercentage for " + result.getMethod().getMethodName()));
 	}
 
 	private Date getTime(long millis) {
@@ -70,4 +125,8 @@ public class ExtentReporterNG implements IReporter {
 		calendar.setTimeInMillis(millis);
 		return calendar.getTime();
 	}
+
+	
+
+	
 }
